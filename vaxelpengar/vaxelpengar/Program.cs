@@ -24,25 +24,28 @@ namespace vaxelpengar
                {
                 Console.Write("Ange totalsumman:");
                 summa = double.Parse(Console.ReadLine());
+                attbetala = Convert.ToInt32(Math.Round(summa));
+                if( summa < 0.5)
+                {
+                    throw new OverflowException();
+                }
+               
                 break;
-               }
-                catch(System.ArgumentNullException)
-               {
-                   Console.WriteLine("Ett oväntat fel inträffade");
-               }
 
-               catch (System.FormatException)
+               }             
+               catch (FormatException)
                {
                    Console.WriteLine("Fel format, använd siffror");
                }
-               catch (System.OverflowException)
+               catch (OverflowException)
                {
-                   Console.WriteLine("För stort tal");
+                   Console.WriteLine("För stort eller för litet tal");
 
                }
+
             }
 
-            attbetala = Convert.ToInt32(Math.Round(summa));
+            
 
 
             while (true)
@@ -57,17 +60,14 @@ namespace vaxelpengar
                     }
                     break;
                 }
-                catch (System.ArgumentNullException)
-                {
-                    Console.WriteLine("Null Exception fel");
-                }
-                catch (System.FormatException)
+              
+                catch (FormatException)
                 {
                     Console.WriteLine("Fel format");
                 }
-                catch (System.OverflowException)
+                catch (OverflowException)
                 {
-                    Console.WriteLine("Inte tillräckligt stort tal för att betala ");
+                    Console.WriteLine("Du måste ange ett tal större än totalsumman");
                 }
 
             }
@@ -81,19 +81,29 @@ namespace vaxelpengar
 
             //Räkna ut differensen och skriv ut pengar att ge tillbaka
 
-            
-
-            Console.WriteLine("Att betala: {0}", attbetala);
-
+           
             växel = betalat - attbetala;
-
-            Console.WriteLine("Pengar tillbaka: {0}", växel);
 
             avrundning = summa - attbetala;
 
-            Console.WriteLine("Öresavrundning: {0:f2}", avrundning);
+            
 
-            //Skriv ut växel samt 
+            //Skriv ut Kvitto
+
+            Console.WriteLine("");
+            Console.WriteLine("KVITTO");
+            Console.WriteLine("----------------------------");
+            Console.WriteLine("Att betala       : {0} kr", attbetala);
+            Console.WriteLine("Totalt           : {0} kr", summa);
+            Console.WriteLine("Öresavrundning   : {0:f2} kr", avrundning);
+            Console.WriteLine("Att betala       : {0} kr", attbetala);
+            Console.WriteLine("Kontant          : {0} kr", betalat);
+            Console.WriteLine("Tillbaka         : {0} kr", växel);
+            Console.WriteLine("----------------------------");
+            
+
+
+
 
             //Räkna ut antalet av 500kr 100kr 20kr 10kr 5kr 1kr som ska ges tillbaka
 
