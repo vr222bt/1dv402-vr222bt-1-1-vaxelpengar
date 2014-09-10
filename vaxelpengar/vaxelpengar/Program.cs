@@ -17,19 +17,71 @@ namespace vaxelpengar
             int attbetala;
             int växel;
             double avrundning;
-            //Läs in värden
+            //Läs in värden och antera felinmatning
+            while (true)
+            {
+               try
+               {
+                Console.Write("Ange totalsumman:");
+                summa = double.Parse(Console.ReadLine());
+                break;
+               }
+                catch(System.ArgumentNullException)
+               {
+                   Console.WriteLine("Ett oväntat fel inträffade");
+               }
 
-            Console.Write("Ange totalsumman:");
-            summa = double.Parse(Console.ReadLine());
+               catch (System.FormatException)
+               {
+                   Console.WriteLine("Fel format, använd siffror");
+               }
+               catch (System.OverflowException)
+               {
+                   Console.WriteLine("För stort tal");
 
-            Console.Write("Ange erhållet belopp:");
-            betalat = int.Parse(Console.ReadLine());
+               }
+            }
+
+            attbetala = Convert.ToInt32(Math.Round(summa));
+
+
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Ange erhållet belopp:");
+                    betalat = int.Parse(Console.ReadLine());
+                    if(attbetala > betalat)
+                    {
+                        throw new OverflowException();
+                    }
+                    break;
+                }
+                catch (System.ArgumentNullException)
+                {
+                    Console.WriteLine("Null Exception fel");
+                }
+                catch (System.FormatException)
+                {
+                    Console.WriteLine("Fel format");
+                }
+                catch (System.OverflowException)
+                {
+                    Console.WriteLine("Inte tillräckligt stort tal för att betala ");
+                }
+
+            }
+
+
+
+             
+            
             
 
 
             //Räkna ut differensen och skriv ut pengar att ge tillbaka
 
-            attbetala = Convert.ToInt32(Math.Round(summa));
+            
 
             Console.WriteLine("Att betala: {0}", attbetala);
 
