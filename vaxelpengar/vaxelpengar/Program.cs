@@ -16,6 +16,7 @@ namespace vaxelpengar
             int betalat;
             int attbetala;
             int växel;
+            double avrundning;
             //Läs in värden
 
             Console.Write("Ange totalsumman:");
@@ -35,6 +36,10 @@ namespace vaxelpengar
             växel = betalat - attbetala;
 
             Console.WriteLine("Pengar tillbaka: {0}", växel);
+
+            avrundning = summa - attbetala;
+
+            Console.WriteLine("Öresavrundning: {0:f2}", avrundning);
 
             //Skriv ut växel samt 
 
