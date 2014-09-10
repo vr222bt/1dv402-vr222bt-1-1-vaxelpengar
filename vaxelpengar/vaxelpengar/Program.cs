@@ -72,22 +72,12 @@ namespace vaxelpengar
 
             }
 
-
-
-             
-            
-            
-
-
             //Räkna ut differensen och skriv ut pengar att ge tillbaka
 
-           
             växel = betalat - attbetala;
-
             avrundning = summa - attbetala;
 
             
-
             //Skriv ut Kvitto
 
             Console.WriteLine("");
@@ -101,9 +91,6 @@ namespace vaxelpengar
             Console.WriteLine("Tillbaka         : {0} kr", växel);
             Console.WriteLine("----------------------------");
             
-
-
-
 
             //Räkna ut antalet av 500kr 100kr 20kr 10kr 5kr 1kr som ska ges tillbaka
 
