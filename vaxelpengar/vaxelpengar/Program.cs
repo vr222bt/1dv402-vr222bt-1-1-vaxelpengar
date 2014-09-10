@@ -83,7 +83,6 @@ namespace vaxelpengar
             Console.WriteLine("");
             Console.WriteLine("KVITTO");
             Console.WriteLine("----------------------------");
-            Console.WriteLine("Att betala       : {0} kr", attbetala);
             Console.WriteLine("Totalt           : {0} kr", summa);
             Console.WriteLine("Öresavrundning   : {0:f2} kr", avrundning);
             Console.WriteLine("Att betala       : {0} kr", attbetala);
