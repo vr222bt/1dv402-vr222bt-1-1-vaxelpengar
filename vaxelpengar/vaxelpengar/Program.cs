@@ -13,39 +13,51 @@ namespace vaxelpengar
             //Deklarera variabler
 
             double summa;
+            double avrundning;
             int betalat;
             int attbetala;
             int växel;
-            double avrundning;
-            //Läs in värden och antera felinmatning
+
+
+            int antalfemhundringar;
+            int antalhundringar;
+            int antalfemtiolappar;
+            int antaltjugor;
+            int antaltior;
+            int antalfemor;
+            int antalenkronor;
+
+            //Läs in värden och hantera felinmatning
             while (true)
             {
-               try
-               {
-                Console.Write("Ange totalsumman:");
-                summa = double.Parse(Console.ReadLine());
-                attbetala = Convert.ToInt32(Math.Round(summa));
-                if( summa < 0.5)
+                try
                 {
-                    throw new OverflowException();
+                    Console.Write("Ange totalsumman:");
+                    summa = double.Parse(Console.ReadLine());
+                    attbetala = Convert.ToInt32(Math.Round(summa));
+                    if (summa < 0.5)
+                    {
+                        throw new OverflowException();
+                    }
+
+                    break;
+
                 }
-               
-                break;
-
-               }             
-               catch (FormatException)
-               {
-                   Console.WriteLine("Fel format, använd siffror");
-               }
-               catch (OverflowException)
-               {
-                   Console.WriteLine("För stort eller för litet tal");
-
-               }
+                catch (FormatException)
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Fel format, använd siffror");
+                    Console.ResetColor();
+                }
+                catch (OverflowException)
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.WriteLine("För stort eller för litet tal");
+                    Console.ResetColor();
+                    return;
+                }
 
             }
-
-            
 
 
             while (true)
@@ -54,78 +66,103 @@ namespace vaxelpengar
                 {
                     Console.Write("Ange erhållet belopp:");
                     betalat = int.Parse(Console.ReadLine());
-                    if(attbetala > betalat)
+                    if (attbetala > betalat)
                     {
                         throw new OverflowException();
                     }
                     break;
                 }
-              
+
                 catch (FormatException)
                 {
-                    Console.WriteLine("Fel format");
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Fel format, använd siffror");
+                    Console.ResetColor();
                 }
                 catch (OverflowException)
                 {
+                    Console.BackgroundColor = ConsoleColor.Red;
                     Console.WriteLine("Du måste ange ett tal större än totalsumman");
+                    Console.ResetColor();
+                    return;
                 }
+
 
             }
 
-            //Räkna ut differensen och skriv ut pengar att ge tillbaka
+            //Räkna ut växel och öresavrundning
 
             växel = betalat - attbetala;
             avrundning = summa - attbetala;
 
-            
+
             //Skriv ut Kvitto
 
             Console.WriteLine("");
             Console.WriteLine("KVITTO");
             Console.WriteLine("----------------------------");
-            Console.WriteLine("Totalt           : {0} kr", summa);
-            Console.WriteLine("Öresavrundning   : {0:f2} kr", avrundning);
-            Console.WriteLine("Att betala       : {0} kr", attbetala);
-            Console.WriteLine("Kontant          : {0} kr", betalat);
-            Console.WriteLine("Tillbaka         : {0} kr", växel);
+            Console.WriteLine("Totalt           : {0:c} ", summa);
+            Console.WriteLine("Öresavrundning   : {0:c} ", avrundning);
+            Console.WriteLine("Att betala       : {0:c} ", attbetala);
+            Console.WriteLine("Kontant          : {0:c} ", betalat);
+            Console.WriteLine("Tillbaka         : {0:c} ", växel);
             Console.WriteLine("----------------------------");
-            
-
-            //Räkna ut antalet av 500kr 100kr 20kr 10kr 5kr 1kr som ska ges tillbaka
-
-            //Skriv ut antalet av olika sedlar/mynt
 
 
+            //Räkna ut antalet av varje sedel/mynt som ska ges tillbaka
+
+            antalfemhundringar = växel / 500;
+            växel %= 500;
+
+            antalhundringar = växel / 100;
+            växel %= 100;
+
+            antalfemtiolappar = växel / 50;
+            växel %= 50;
+
+            antaltjugor = växel / 20;
+            växel %= 20;
+
+            antaltior = växel / 10;
+            växel %= 10;
+
+            antalfemor = växel / 5;
+            växel %= 5;
+
+            antalenkronor = växel;
+
+            //Skriv ut antalet av sedlar/mynt
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            Console.WriteLine();
+            if (antalfemhundringar > 0)
+            {
+                Console.WriteLine("500-lappar   : {0}", antalfemhundringar);
+            }
+            if (antalhundringar > 0)
+            {
+                Console.WriteLine("100-lappar   : {0}", antalhundringar);
+            }
+            if (antalfemtiolappar > 0)
+            {
+                Console.WriteLine("50-lappar    : {0}", antalfemtiolappar);
+            }
+            if (antaltjugor > 0)
+            {
+                Console.WriteLine("20-lappar    : {0}", antaltjugor);
+            }
+            if (antaltior > 0)
+            {
+                Console.WriteLine("10-kronor    : {0}", antaltior);
+            }
+            if (antalfemor > 0)
+            {
+                Console.WriteLine("5-kronor     : {0}", antalfemor);
+            }
+            if (antalenkronor > 0)
+            {
+                Console.WriteLine("1-kronor     : {0}", antalenkronor);
+            }
 
 
         }
