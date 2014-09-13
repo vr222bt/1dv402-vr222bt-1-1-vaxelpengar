@@ -14,18 +14,18 @@ namespace vaxelpengar
 
             double summa;
             double avrundning;
-            int betalat;
-            int attbetala;
-            int växel;
+            uint betalat;
+            uint attbetala;
+            uint växel;
 
 
-            int antalfemhundringar;
-            int antalhundringar;
-            int antalfemtiolappar;
-            int antaltjugor;
-            int antaltior;
-            int antalfemor;
-            int antalenkronor;
+            uint antalfemhundringar;
+            uint antalhundringar;
+            uint antalfemtiolappar;
+            uint antaltjugor;
+            uint antaltior;
+            uint antalfemor;
+            uint antalenkronor;
 
             //Läs in värden och hantera felinmatning
             while (true)
@@ -34,7 +34,7 @@ namespace vaxelpengar
                 {
                     Console.Write("Ange totalsumman:");
                     summa = double.Parse(Console.ReadLine());
-                    attbetala = Convert.ToInt32(Math.Round(summa));
+                    attbetala = (uint)Math.Round(summa);
                     if (summa < 0.5)
                     {
                         throw new OverflowException();
@@ -65,7 +65,7 @@ namespace vaxelpengar
                 try
                 {
                     Console.Write("Ange erhållet belopp:");
-                    betalat = int.Parse(Console.ReadLine());
+                    betalat = uint.Parse(Console.ReadLine());
                     if (attbetala > betalat)
                     {
                         throw new OverflowException();
@@ -76,7 +76,7 @@ namespace vaxelpengar
                 catch (FormatException)
                 {
                     Console.BackgroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Fel format, använd siffror");
+                    Console.WriteLine("Fel format, använd siffror. Man kan bara betala med hela kronor");
                     Console.ResetColor();
                 }
                 catch (OverflowException)
@@ -100,13 +100,13 @@ namespace vaxelpengar
 
             Console.WriteLine("");
             Console.WriteLine("KVITTO");
-            Console.WriteLine("----------------------------");
-            Console.WriteLine("Totalt           : {0:c} ", summa);
-            Console.WriteLine("Öresavrundning   : {0:c} ", avrundning);
-            Console.WriteLine("Att betala       : {0:c} ", attbetala);
-            Console.WriteLine("Kontant          : {0:c} ", betalat);
-            Console.WriteLine("Tillbaka         : {0:c} ", växel);
-            Console.WriteLine("----------------------------");
+            Console.WriteLine("----------------------------------");
+            Console.WriteLine("Totalt           : {0,15:c} ", summa);
+            Console.WriteLine("Öresavrundning   : {0,15:c} ", avrundning);
+            Console.WriteLine("Att betala       : {0,15:c} ", attbetala);
+            Console.WriteLine("Kontant          : {0,15:c} ", betalat);
+            Console.WriteLine("Tillbaka         : {0,15:c} ", växel);
+            Console.WriteLine("---------------------------------");
 
 
             //Räkna ut antalet av varje sedel/mynt som ska ges tillbaka
@@ -163,6 +163,7 @@ namespace vaxelpengar
             {
                 Console.WriteLine("1-kronor     : {0}", antalenkronor);
             }
+            
 
 
         }
